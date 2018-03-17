@@ -2,6 +2,7 @@ name: SimpleRotate
 author: nextRound
 main: de.nextround.simplerotate.Main
 version: 1.0
+depend: [FastAsyncWorldEdit]
 
 commands:
   simplerotate:
