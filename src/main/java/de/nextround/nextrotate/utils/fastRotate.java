@@ -23,7 +23,7 @@ public class fastRotate {
             if (degreeyaw > clipdirection) {
                 float difference = degreeyaw - clipdirection;
 
-                Bukkit.getServer().dispatchCommand(player, "/rotate "+difference+" 0 "+pitch);
+                Bukkit.getServer().dispatchCommand(player, "/rotate "+difference+" 0 " + pitch);
 
                 Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                     public void run() {
@@ -33,7 +33,7 @@ public class fastRotate {
             } else {
                 float difference = clipdirection - degreeyaw;
 
-                Bukkit.getServer().dispatchCommand(player, "/rotate "+difference*(-1)+" 0 "+pitch);
+                Bukkit.getServer().dispatchCommand(player, "/rotate "+difference*(-1)+" 0 " + pitch);
 
                 Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                     public void run() {
@@ -45,7 +45,7 @@ public class fastRotate {
             if (yaw > clipdirection) {
                 float difference = yaw - clipdirection;
 
-                Bukkit.getServer().dispatchCommand(player, "/rotate "+difference+" 0 "+pitch);
+                Bukkit.getServer().dispatchCommand(player, "/rotate "+difference+" 0 " + pitch);
 
                 Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                     public void run() {
@@ -55,7 +55,7 @@ public class fastRotate {
             } else {
                 float difference = clipdirection - yaw;
 
-                Bukkit.getServer().dispatchCommand(player, "/rotate "+difference*(-1)+" 0 "+pitch);
+                Bukkit.getServer().dispatchCommand(player, "/rotate "+difference*(-1)+" 0 " + pitch);
 
                 Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                     public void run() {
