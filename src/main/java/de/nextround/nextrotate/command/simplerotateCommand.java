@@ -1,13 +1,9 @@
-package de.nextround.simplerotate.command;
+package de.nextround.nextrotate.command;
 
 import com.boydti.fawe.FaweAPI;
 import com.boydti.fawe.object.FawePlayer;
 import com.sk89q.worldedit.EmptyClipboardException;
-import com.sk89q.worldedit.WorldEdit;
-import com.sk89q.worldedit.bukkit.WorldEditAPI;
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldedit.math.transform.Transform;
-import de.nextround.simplerotate.Main;
+import de.nextround.nextrotate.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,16 +22,16 @@ public class simplerotateCommand implements CommandExecutor{
         Player player = (Player) sender;
         FawePlayer fawePlayer = FaweAPI.wrapPlayer(player);
 
-        if(command.getName().equalsIgnoreCase("simplerotate") || command.getName().equalsIgnoreCase("sr")) {
-            if(!player.hasPermission("simplerotate.command")) {
-                player.sendMessage(instance.getPrefix()+" §cYou don't have permissions to do that! §e--> simplerotate.command");
+        if(command.getName().equalsIgnoreCase("nextrotate") || command.getName().equalsIgnoreCase("nr")) {
+            if(!player.hasPermission("nextrotate.command")) {
+                player.sendMessage(instance.getPrefix()+" §cYou don't have permissions to do that! §e--> nextrotate.command");
                 return false;
             }
 
             if(args.length==0) {
                 //Rotation
                 if(!instance.yawSave.containsKey(player)) {
-                    player.sendMessage(instance.getPrefix()+" §cYou have to set your clipboard direction: §e/simplerotate direction");
+                    player.sendMessage(instance.getPrefix()+" §cYou have to set your clipboard direction: §e/nextrotate direction");
                     return false;
                 }
                 try {
@@ -67,17 +63,17 @@ public class simplerotateCommand implements CommandExecutor{
                         player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + player.getLocation().getYaw());
                     }
                 }else{
-                    player.sendMessage(instance.getPrefix()+" §9Usage§8: §f/simplerotate [direction]");
+                    player.sendMessage(instance.getPrefix()+" §9Usage§8: §f/nextrotate [direction]");
                     return false;
                 }
             }else{
-                player.sendMessage(instance.getPrefix()+" §9Usage§8: §f/simplerotate [direction]");
+                player.sendMessage(instance.getPrefix()+" §9Usage§8: §f/nextrotate [direction]");
                 return false;
             }
-        }else if(command.getName().equalsIgnoreCase("srd")) {
+        }else if(command.getName().equalsIgnoreCase("nrd")) {
             //clipboarddirection shortcut
-            if(!player.hasPermission("simplerotate.command")) {
-                player.sendMessage(instance.getPrefix()+" §cYou don't have permissions to do that! §e--> simplerotate.command");
+            if(!player.hasPermission("nextrotate.command")) {
+                player.sendMessage(instance.getPrefix()+" §cYou don't have permissions to do that! §e--> nextrotate.command");
                 return false;
             }
 
@@ -96,7 +92,7 @@ public class simplerotateCommand implements CommandExecutor{
                     player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + player.getLocation().getYaw());
                 }
             }else{
-                player.sendMessage(instance.getPrefix()+" §9Usage§8: §f/srd");
+                player.sendMessage(instance.getPrefix()+" §9Usage§8: §f/nrd");
             }
         }
         return false;

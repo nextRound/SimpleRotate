@@ -1,10 +1,10 @@
-name: SimpleRotate
+name: nextRotate
 author: nextRound
-main: de.nextround.simplerotate.Main
+main: de.nextround.nextrotate.Main
 version: 1.0
 depend: [FastAsyncWorldEdit]
 
 commands:
-  simplerotate:
-  sr:
-  srd:
+  nextrotate:
+  nr:
+  nrd:
