@@ -33,6 +33,7 @@ public class simplerotateCommand implements CommandExecutor{
             }
 
             if(args.length==0) {
+                //Rotation
                 if(!instance.yawSave.containsKey(player)) {
                     player.sendMessage(instance.getPrefix()+" §cYou have to set your clipboard direction: §e/simplerotate direction");
                     return false;
@@ -50,6 +51,7 @@ public class simplerotateCommand implements CommandExecutor{
                     return false;
                 }
             }else if(args.length==1) {
+                //clipboarddirection
                 if(args[0].equalsIgnoreCase("direction")) {
                     if(player.getLocation().getYaw() < 0) {
                         instance.yawSave.put(player, 360 + player.getLocation().getYaw());
@@ -73,6 +75,7 @@ public class simplerotateCommand implements CommandExecutor{
                 return false;
             }
         }else if(command.getName().equalsIgnoreCase("srd")) {
+            //clipboarddirection shortcut
             if(!player.hasPermission("simplerotate.command")) {
                 player.sendMessage(instance.getPrefix()+" §cYou don't have permissions to do that! §e--> simplerotate.command");
                 return false;
