@@ -12,7 +12,7 @@ public class fastRotate {
         this.instance = instance;
     }
 
-    public void rotate(Player player) {
+    public void rotate(final Player player) {
         float clipdirection = instance.yawSave.get(player);
         float yaw = player.getLocation().getYaw();
 
@@ -23,24 +23,44 @@ public class fastRotate {
                 float difference = degreeyaw - clipdirection;
 
                 Bukkit.getServer().dispatchCommand(player, "/rotate "+difference);
-                Bukkit.getServer().dispatchCommand(player, "/paste");
+
+                Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                    public void run() {
+                        Bukkit.getServer().dispatchCommand(player, "/paste");
+                    }
+                }, 10);
             } else {
                 float difference = clipdirection - degreeyaw;
 
                 Bukkit.getServer().dispatchCommand(player, "/rotate "+difference*(-1));
-                Bukkit.getServer().dispatchCommand(player, "/paste");
+
+                Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                    public void run() {
+                        Bukkit.getServer().dispatchCommand(player, "/paste");
+                    }
+                }, 10);
             }
         }else{
             if (yaw > clipdirection) {
                 float difference = yaw - clipdirection;
 
                 Bukkit.getServer().dispatchCommand(player, "/rotate "+difference);
-                Bukkit.getServer().dispatchCommand(player, "/paste");
+
+                Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                    public void run() {
+                        Bukkit.getServer().dispatchCommand(player, "/paste");
+                    }
+                }, 10);
             } else {
                 float difference = clipdirection - yaw;
 
                 Bukkit.getServer().dispatchCommand(player, "/rotate "+difference*(-1));
-                Bukkit.getServer().dispatchCommand(player, "/paste");
+
+                Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                    public void run() {
+                        Bukkit.getServer().dispatchCommand(player, "/paste");
+                    }
+                }, 10);
             }
         }
     }

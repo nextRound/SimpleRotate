@@ -42,7 +42,7 @@ public class simplerotateCommand implements CommandExecutor{
 
                         instance.fastrotate.rotate(player);
 
-                        player.sendMessage(instance.getPrefix() + " §9Clipboard rotated!");
+                        player.sendMessage(instance.getPrefix() + " §9Clipboard rotated and pasted!");
 
                     }
                 }catch (EmptyClipboardException e) {
