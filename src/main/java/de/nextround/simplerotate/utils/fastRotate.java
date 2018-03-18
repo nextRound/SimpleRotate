@@ -23,20 +23,24 @@ public class fastRotate {
                 float difference = degreeyaw - clipdirection;
 
                 Bukkit.getServer().dispatchCommand(player, "/rotate "+difference);
+                Bukkit.getServer().dispatchCommand(player, "/paste");
             } else {
                 float difference = clipdirection - degreeyaw;
 
                 Bukkit.getServer().dispatchCommand(player, "/rotate "+difference*(-1));
+                Bukkit.getServer().dispatchCommand(player, "/paste");
             }
         }else{
             if (yaw > clipdirection) {
                 float difference = yaw - clipdirection;
 
                 Bukkit.getServer().dispatchCommand(player, "/rotate "+difference);
+                Bukkit.getServer().dispatchCommand(player, "/paste");
             } else {
                 float difference = clipdirection - yaw;
 
                 Bukkit.getServer().dispatchCommand(player, "/rotate "+difference*(-1));
+                Bukkit.getServer().dispatchCommand(player, "/paste");
             }
         }
     }
