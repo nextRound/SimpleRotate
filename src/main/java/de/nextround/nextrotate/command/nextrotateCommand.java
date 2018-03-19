@@ -65,17 +65,11 @@ public class nextrotateCommand implements CommandExecutor{
 
                         Bukkit.getServer().dispatchCommand(player, "/copy");
 
-                        instance.lastYawRotation.put(player, 0F);
-                        instance.lastPitchRotation.put(player, 0F);
-
                         player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + (player.getLocation().getYaw()));
                     }else{
                         instance.yawSave.put(player, player.getLocation().getYaw());
 
                         Bukkit.getServer().dispatchCommand(player, "/copy");
-
-                        instance.lastYawRotation.put(player, 0F);
-                        instance.lastPitchRotation.put(player, 0F);
 
                         player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + player.getLocation().getYaw());
                     }
@@ -99,17 +93,11 @@ public class nextrotateCommand implements CommandExecutor{
 
                     Bukkit.getServer().dispatchCommand(player, "/copy");
 
-                    instance.lastYawRotation.put(player, 0F);
-                    instance.lastPitchRotation.put(player, 0F);
-
                     player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + (player.getLocation().getYaw()));
                 }else{
                     instance.yawSave.put(player, player.getLocation().getYaw());
 
                     Bukkit.getServer().dispatchCommand(player, "/copy");
-
-                    instance.lastYawRotation.put(player, 0F);
-                    instance.lastPitchRotation.put(player, 0F);
 
                     player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + player.getLocation().getYaw());
                 }

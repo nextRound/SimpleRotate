@@ -13,8 +13,6 @@ public class Main extends JavaPlugin{
     private String prefix = "§8[§3nextRotate§8]";
 
     public HashMap<Player, Float> yawSave = new HashMap<Player, Float>();
-    public HashMap<Player, Float> lastYawRotation = new HashMap<Player, Float>();
-    public HashMap<Player, Float> lastPitchRotation = new HashMap<Player, Float>();
 
     public fastRotate fastrotate;
 
