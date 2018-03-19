@@ -1,6 +1,6 @@
 package de.nextround.nextrotate;
 
-import de.nextround.nextrotate.command.simplerotateCommand;
+import de.nextround.nextrotate.command.nextrotateCommand;
 import de.nextround.nextrotate.utils.fastRotate;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -13,6 +13,8 @@ public class Main extends JavaPlugin{
     private String prefix = "§8[§3nextRotate§8]";
 
     public HashMap<Player, Float> yawSave = new HashMap<Player, Float>();
+    public HashMap<Player, Float> lastYawRotation = new HashMap<Player, Float>();
+    public HashMap<Player, Float> lastPitchRotation = new HashMap<Player, Float>();
 
     public fastRotate fastrotate;
 
@@ -31,9 +33,9 @@ public class Main extends JavaPlugin{
     }
 
     private void registerCommands() {
-        getCommand("nextrotate").setExecutor(new simplerotateCommand(this));
-        getCommand("nr").setExecutor(new simplerotateCommand(this));
-        getCommand("nrd").setExecutor(new simplerotateCommand(this));
+        getCommand("nextrotate").setExecutor(new nextrotateCommand(this));
+        getCommand("nr").setExecutor(new nextrotateCommand(this));
+        getCommand("nrd").setExecutor(new nextrotateCommand(this));
     }
 
     public String getPrefix() {

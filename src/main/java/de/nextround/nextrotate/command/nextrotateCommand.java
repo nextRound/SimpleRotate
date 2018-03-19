@@ -3,6 +3,8 @@ package de.nextround.nextrotate.command;
 import com.boydti.fawe.FaweAPI;
 import com.boydti.fawe.object.FawePlayer;
 import com.sk89q.worldedit.EmptyClipboardException;
+import com.sk89q.worldedit.extent.clipboard.Clipboard;
+import com.sk89q.worldedit.session.ClipboardHolder;
 import de.nextround.nextrotate.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -10,17 +12,17 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class simplerotateCommand implements CommandExecutor{
+public class nextrotateCommand implements CommandExecutor{
 
     private Main instance;
 
-    public simplerotateCommand(Main instance) {
+    public nextrotateCommand(Main instance) {
         this.instance = instance;
     }
 
     public boolean onCommand(CommandSender sender, Command command, String arg, String[] args) {
-        Player player = (Player) sender;
-        FawePlayer fawePlayer = FaweAPI.wrapPlayer(player);
+        final Player player = (Player) sender;
+        final FawePlayer fawePlayer = FaweAPI.wrapPlayer(player);
 
         if(command.getName().equalsIgnoreCase("nextrotate") || command.getName().equalsIgnoreCase("nr")) {
             if(!player.hasPermission("nextrotate.command")) {
@@ -29,7 +31,6 @@ public class simplerotateCommand implements CommandExecutor{
             }
 
             if(args.length==0) {
-                //Rotation
                 if(!instance.yawSave.containsKey(player)) {
                     player.sendMessage(instance.getPrefix()+" §cYou have to set your clipboard direction: §e/nextrotate direction");
                     return false;
@@ -37,28 +38,44 @@ public class simplerotateCommand implements CommandExecutor{
                 try {
                     if (fawePlayer.getSession().getClipboard() != null) {
 
+                        ClipboardHolder clipboardHolder = fawePlayer.getSession().getClipboard();
+
+                        final Clipboard clipboard = clipboardHolder.getClipboards().get(0);
+
                         instance.fastrotate.rotate(player);
 
-                        player.sendMessage(instance.getPrefix() + " §9Clipboard rotated and pasted!");
+                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                            public void run() {
+                                fawePlayer.getSession().setClipboard(new ClipboardHolder(clipboard, fawePlayer.getWorld().getWorldData()));
+
+                                player.sendMessage(instance.getPrefix() + " §9Clipboard rotated and pasted!");
+                            }
+                        },20);
 
                     }
                 }catch (EmptyClipboardException e) {
                     player.sendMessage(instance.getPrefix()+" §cYour cilpboard is empty!");
+                    e.printStackTrace();
                     return false;
                 }
             }else if(args.length==1) {
-                //clipboarddirection
                 if(args[0].equalsIgnoreCase("direction")) {
                     if(player.getLocation().getYaw() < 0) {
-                        instance.yawSave.put(player, 360 + player.getLocation().getYaw());
+                        instance.yawSave.put(player, player.getLocation().getYaw());
 
                         Bukkit.getServer().dispatchCommand(player, "/copy");
 
-                        player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + (360 + player.getLocation().getYaw()));
+                        instance.lastYawRotation.put(player, 0F);
+                        instance.lastPitchRotation.put(player, 0F);
+
+                        player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + (player.getLocation().getYaw()));
                     }else{
                         instance.yawSave.put(player, player.getLocation().getYaw());
 
                         Bukkit.getServer().dispatchCommand(player, "/copy");
+
+                        instance.lastYawRotation.put(player, 0F);
+                        instance.lastPitchRotation.put(player, 0F);
 
                         player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + player.getLocation().getYaw());
                     }
@@ -71,7 +88,6 @@ public class simplerotateCommand implements CommandExecutor{
                 return false;
             }
         }else if(command.getName().equalsIgnoreCase("nrd")) {
-            //clipboarddirection shortcut
             if(!player.hasPermission("nextrotate.command")) {
                 player.sendMessage(instance.getPrefix()+" §cYou don't have permissions to do that! §e--> nextrotate.command");
                 return false;
@@ -79,15 +95,21 @@ public class simplerotateCommand implements CommandExecutor{
 
             if(args.length==0) {
                 if(player.getLocation().getYaw() < 0) {
-                    instance.yawSave.put(player, 360 + player.getLocation().getYaw());
+                    instance.yawSave.put(player, player.getLocation().getYaw());
 
                     Bukkit.getServer().dispatchCommand(player, "/copy");
 
-                    player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + (360 + player.getLocation().getYaw()));
+                    instance.lastYawRotation.put(player, 0F);
+                    instance.lastPitchRotation.put(player, 0F);
+
+                    player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + (player.getLocation().getYaw()));
                 }else{
                     instance.yawSave.put(player, player.getLocation().getYaw());
 
                     Bukkit.getServer().dispatchCommand(player, "/copy");
+
+                    instance.lastYawRotation.put(player, 0F);
+                    instance.lastPitchRotation.put(player, 0F);
 
                     player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + player.getLocation().getYaw());
                 }
