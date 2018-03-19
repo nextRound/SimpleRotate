@@ -23,6 +23,9 @@ public class fastRotate {
                 final float difference = yaw - clipdirection;
 
                 if (instance.yawSave.get(player) <= -45 && instance.yawSave.get(player) >= -135) {
+
+                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
+
                     if (yaw > 180 && yaw < 360) {
                         Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " 0 " + pitch * (-1));
 
@@ -41,6 +44,9 @@ public class fastRotate {
                         }, 10);
                     }
                 } else if (instance.yawSave.get(player) <= -225 && instance.yawSave.get(player) >= -315) {
+
+                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
+
                     if (yaw > 180 && yaw < 360) {
                         Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " 0 " + pitch);
 
@@ -59,6 +65,9 @@ public class fastRotate {
                         }, 10);
                     }
                 } else if (instance.yawSave.get(player) <= -135 && instance.yawSave.get(player) >= -225) {
+
+                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
+
                     if (yaw > 180 && yaw < 360) {
                         Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " " + pitch * (-1) + " 0 ");
 
@@ -78,6 +87,9 @@ public class fastRotate {
                         }, 10);
                     }
                 } else if ((instance.yawSave.get(player) >= -45 && instance.yawSave.get(player) <= 0) || (instance.yawSave.get(player) <= -315 && instance.yawSave.get(player) >= -360)) {
+
+                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
+
                     if (yaw > 180 && yaw < 360) {
                         Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " " + pitch + " 0 ");
 
@@ -204,6 +216,8 @@ public class fastRotate {
 
                 if (-360+instance.yawSave.get(player) <= -45 && -360+instance.yawSave.get(player) >= -135) {
 
+                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
+
                     if (yaw > 180 && yaw < 360) {
                         Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " 0 " + pitch * (-1));
 
@@ -222,6 +236,9 @@ public class fastRotate {
                         }, 10);
                     }
                 } else if (-360+instance.yawSave.get(player) <= -225 && -360+instance.yawSave.get(player) >= -315) {
+
+                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
+
                     if (yaw > 180 && yaw < 360) {
                         Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " 0 " + pitch);
 
@@ -240,6 +257,9 @@ public class fastRotate {
                         }, 10);
                     }
                 } else if (-360+instance.yawSave.get(player) <= -135 && -360+instance.yawSave.get(player) >= -225) {
+
+                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
+
                     if (yaw > 180 && yaw < 360) {
                         Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " " + pitch * (-1) + " 0 ");
 
@@ -258,6 +278,9 @@ public class fastRotate {
                         }, 10);
                     }
                 } else if ((-360+instance.yawSave.get(player) >= -45 && -360+instance.yawSave.get(player) <= 0) || (-360+instance.yawSave.get(player) <= -315 && -360+instance.yawSave.get(player) >= -360)) {
+
+                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
+
                     if (yaw > 180 && yaw < 360) {
                         Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " " + pitch + " 0 ");
 
@@ -291,6 +314,8 @@ public class fastRotate {
 
                 if (-360+instance.yawSave.get(player) <= -45 && -360+instance.yawSave.get(player) >= -135) {
 
+                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
+
                     if (yaw > 180 && yaw < 360) {
                         Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " 0 " + pitch * (-1));
 
@@ -309,6 +334,8 @@ public class fastRotate {
                         }, 10);
                     }
                 } else if (-360+instance.yawSave.get(player) <= -225 && -360+instance.yawSave.get(player) >= -315) {
+
+                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
 
                     if (yaw > 180 && yaw < 360) {
                         Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " 0 " + pitch);
@@ -329,6 +356,8 @@ public class fastRotate {
                     }
                 } else if (-360+instance.yawSave.get(player) <= -135 && -360+instance.yawSave.get(player) >= -225) {
 
+                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
+
                     if (yaw > 180 && yaw < 360) {
                         Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " " + pitch * (-1) + " 0 ");
 
@@ -348,6 +377,8 @@ public class fastRotate {
                         }, 10);
                     }
                 } else if ((-360+instance.yawSave.get(player) >= -45 && -360+instance.yawSave.get(player) <= 0) || (-360+instance.yawSave.get(player) <= -315 && -360+instance.yawSave.get(player) >= -360)) {
+
+                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
 
                     if (yaw > 180 && yaw < 360) {
                         Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " " + pitch + " 0 ");
