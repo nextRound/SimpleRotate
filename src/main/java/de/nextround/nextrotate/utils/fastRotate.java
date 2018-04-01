@@ -40,11 +40,11 @@ public class fastRotate {
 
                                     Bukkit.getServer().dispatchCommand(player, "/paste");
                                 }
-                            }, 20);
+                            }, 15);
                         }
-                    }, 20);
+                    }, 15);
                 }
-            }, 20);
+            }, 15);
         }else if(firstyaw > 45 && firstyaw < 135) {
             System.out.println("CASE2: FIRSTYAW: "+firstyaw+" SECYAW: "+secyaw+" PITCH: "+pitch+" DIFFERENCE: "+difference);
 
@@ -61,11 +61,11 @@ public class fastRotate {
 
                                     Bukkit.getServer().dispatchCommand(player, "/paste");
                                 }
-                            }, 20);
+                            }, 15);
                         }
-                    },20);
+                    },15);
                 }
-            }, 20);
+            }, 15);
         }else if(firstyaw > 135 && firstyaw < 225) {
             System.out.println("CASE3: FIRSTYAW: "+firstyaw+" SECYAW: "+secyaw+" PITCH: "+pitch+" DIFFERENCE: "+difference);
 
@@ -82,11 +82,11 @@ public class fastRotate {
 
                                     Bukkit.getServer().dispatchCommand(player, "/paste");
                                 }
-                            }, 20);
+                            }, 15);
                         }
-                    },20);
+                    },15);
                 }
-            }, 20);
+            }, 15);
         }else if(firstyaw > 225 && firstyaw < 315) {
             System.out.println("CASE4: FIRSTYAW: "+firstyaw+" SECYAW: "+secyaw+" PITCH: "+pitch+" DIFFERENCE: "+difference);
 
@@ -103,11 +103,11 @@ public class fastRotate {
 
                                     Bukkit.getServer().dispatchCommand(player, "/paste");
                                 }
-                            }, 20);
+                            }, 15);
                         }
-                    }, 20);
+                    }, 15);
                 }
-            },20);
+            },15);
 
         }
     }

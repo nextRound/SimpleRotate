@@ -42,8 +42,6 @@ public class nextrotateCommand implements CommandExecutor{
 
                         final Clipboard clipboard = clipboardHolder.getClipboards().get(0);
 
-                        player.sendMessage("YAW: "+player.getLocation().getYaw()+" PITCH: "+player.getLocation().getPitch());
-
                         instance.fastrotate.justRotate(player);
 
                         Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
