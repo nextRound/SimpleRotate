@@ -1,5 +1,8 @@
 package de.nextround.nextrotate.utils;
 
+import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.math.transform.CombinedTransform;
+import com.sk89q.worldedit.math.transform.Transform;
 import de.nextround.nextrotate.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -12,404 +15,108 @@ public class fastRotate {
         this.instance = instance;
     }
 
-    public void rotate(final Player player) {
-        float clipdirection = instance.yawSave.get(player) * (-1);
+    public void justRotate(final Player player) {
+        float firstyaw = convertYaw(instance.yawSave.get(player));
+        float secyaw = convertYaw(player.getLocation().getYaw());
 
-        float yaw = player.getLocation().getYaw() * (-1);
-        final float pitch = player.getLocation().getPitch() * (-1);
+        final float pitch = player.getLocation().getPitch();
 
-        if (clipdirection > 0) {
-            if (yaw > clipdirection) {
-                final float difference = yaw - clipdirection;
+        final float difference = firstyaw - secyaw;
 
-                if (instance.yawSave.get(player) <= -45 && instance.yawSave.get(player) >= -135) {
+        if((firstyaw > 0 && firstyaw < 45) || (firstyaw < 360 && firstyaw > 315)) {
 
-                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
+            System.out.println("CASE1: FIRSTYAW: "+firstyaw+" SECYAW: "+secyaw+" PITCH: "+pitch+" DIFFERENCE: "+difference);
 
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " 0 " + pitch * (-1));
+            Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                public void run() {
+                    Bukkit.getServer().dispatchCommand(player, "/rotate 0 " + pitch *(-1) + " 0");
 
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    } else {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " 0 " + pitch * (-1));
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    }
-                } else if (instance.yawSave.get(player) <= -225 && instance.yawSave.get(player) >= -315) {
-
-                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
-
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " 0 " + pitch);
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    } else {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " 0 " + pitch);
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    }
-                } else if (instance.yawSave.get(player) <= -135 && instance.yawSave.get(player) >= -225) {
-
-                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
-
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " " + pitch * (-1) + " 0 ");
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-
-                    } else {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " " + pitch * (-1) + " 0 ");
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    }
-                } else if ((instance.yawSave.get(player) >= -45 && instance.yawSave.get(player) <= 0) || (instance.yawSave.get(player) <= -315 && instance.yawSave.get(player) >= -360)) {
-
-                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
-
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " " + pitch + " 0 ");
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-
-                    } else {
-                        if (clipdirection > 0 && clipdirection < 45) {
-                            Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " " + pitch + " 0 ");
+                    Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                        public void run() {
+                            Bukkit.getServer().dispatchCommand(player, "/rotate " + difference *(-1) + " 0 0");
 
                             Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                                 public void run() {
-                                    Bukkit.getServer().dispatchCommand(player, "/paste");
-                                }
-                            }, 10);
-                        } else {
-                            Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " " + pitch + " 0 ");
 
-                            Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                                public void run() {
                                     Bukkit.getServer().dispatchCommand(player, "/paste");
                                 }
-                            }, 10);
+                            }, 20);
                         }
-                    }
+                    }, 20);
                 }
-            } else {
-                final float difference = clipdirection - yaw;
-                if (instance.yawSave.get(player) <= -45 && instance.yawSave.get(player) >= -135) {
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " 0 " + pitch * (-1));
+            }, 20);
+        }else if(firstyaw > 45 && firstyaw < 135) {
+            System.out.println("CASE2: FIRSTYAW: "+firstyaw+" SECYAW: "+secyaw+" PITCH: "+pitch+" DIFFERENCE: "+difference);
 
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    } else {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " 0 " + pitch * (-1));
+            Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                public void run() {
+                    Bukkit.getServer().dispatchCommand(player, "/rotate 0 0 " + pitch *(-1));
 
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    }
-                } else if (instance.yawSave.get(player) <= -225 && instance.yawSave.get(player) >= -315) {
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " 0 " + pitch);
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    } else {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " 0 " + pitch);
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    }
-                } else if (instance.yawSave.get(player) <= -135 && instance.yawSave.get(player) >= -225) {
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " " + pitch * (-1) + " 0 ");
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-
-                    } else {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " " + pitch * (-1) + " 0 ");
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    }
-                } else if ((instance.yawSave.get(player) >= -45 && instance.yawSave.get(player) <= 0) || (instance.yawSave.get(player) <= -315 && instance.yawSave.get(player) >= -360)) {
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " " + pitch + " 0 ");
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-
-                    } else {
-                        if (clipdirection > 0 && clipdirection < 45) {
-                            Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " " + pitch + " 0 ");
+                    Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                        public void run() {
+                            Bukkit.getServer().dispatchCommand(player, "/rotate " + difference *(-1) + " 0 0");
 
                             Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                                 public void run() {
-                                    Bukkit.getServer().dispatchCommand(player, "/paste");
-                                }
-                            }, 10);
-                        } else {
-                            Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " " + pitch + " 0 ");
 
-                            Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                                public void run() {
                                     Bukkit.getServer().dispatchCommand(player, "/paste");
                                 }
-                            }, 10);
+                            }, 20);
                         }
-                    }
+                    },20);
                 }
-            }
-        }else{
-            clipdirection = 360 + clipdirection;
-            yaw = 360 + yaw;
+            }, 20);
+        }else if(firstyaw > 135 && firstyaw < 225) {
+            System.out.println("CASE3: FIRSTYAW: "+firstyaw+" SECYAW: "+secyaw+" PITCH: "+pitch+" DIFFERENCE: "+difference);
 
-            if (yaw > clipdirection) {
-                final float difference = yaw - clipdirection;
+            Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                public void run() {
+                    Bukkit.getServer().dispatchCommand(player, "/rotate 0 " + pitch + " 0");
 
-                if (-360+instance.yawSave.get(player) <= -45 && -360+instance.yawSave.get(player) >= -135) {
-
-                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
-
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " 0 " + pitch * (-1));
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    } else {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " 0 " + pitch * (-1));
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    }
-                } else if (-360+instance.yawSave.get(player) <= -225 && -360+instance.yawSave.get(player) >= -315) {
-
-                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
-
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " 0 " + pitch);
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    } else {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " 0 " + pitch);
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    }
-                } else if (-360+instance.yawSave.get(player) <= -135 && -360+instance.yawSave.get(player) >= -225) {
-
-                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
-
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " " + pitch * (-1) + " 0 ");
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    } else {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " " + pitch * (-1) + " 0 ");
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    }
-                } else if ((-360+instance.yawSave.get(player) >= -45 && -360+instance.yawSave.get(player) <= 0) || (-360+instance.yawSave.get(player) <= -315 && -360+instance.yawSave.get(player) >= -360)) {
-
-                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
-
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " " + pitch + " 0 ");
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    } else {
-                        if (clipdirection > 0 && clipdirection < 45) {
-                            Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " " + pitch + " 0 ");
+                    Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                        public void run() {
+                            Bukkit.getServer().dispatchCommand(player, "/rotate " + difference *(-1) + " 0 0");
 
                             Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                                 public void run() {
-                                    Bukkit.getServer().dispatchCommand(player, "/paste");
-                                }
-                            }, 10);
-                        } else {
-                            Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " " + pitch + " 0 ");
 
-                            Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                                public void run() {
                                     Bukkit.getServer().dispatchCommand(player, "/paste");
                                 }
-                            }, 10);
+                            }, 20);
                         }
-                    }
+                    },20);
                 }
-            } else {
-                final float difference = clipdirection - yaw;
+            }, 20);
+        }else if(firstyaw > 225 && firstyaw < 315) {
+            System.out.println("CASE4: FIRSTYAW: "+firstyaw+" SECYAW: "+secyaw+" PITCH: "+pitch+" DIFFERENCE: "+difference);
 
-                if (-360+instance.yawSave.get(player) <= -45 && -360+instance.yawSave.get(player) >= -135) {
+            Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                public void run() {
+                    Bukkit.getServer().dispatchCommand(player, "/rotate 0 0 " + pitch);
 
-                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
-
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " 0 " + pitch * (-1));
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    } else {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " 0 " + pitch * (-1));
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    }
-                } else if (-360+instance.yawSave.get(player) <= -225 && -360+instance.yawSave.get(player) >= -315) {
-
-                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
-
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " 0 " + pitch);
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    } else {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " 0 " + pitch);
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    }
-                } else if (-360+instance.yawSave.get(player) <= -135 && -360+instance.yawSave.get(player) >= -225) {
-
-                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
-
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference * (-1) + " " + pitch * (-1) + " 0 ");
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-
-                    } else {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " " + pitch * (-1) + " 0 ");
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-                    }
-                } else if ((-360+instance.yawSave.get(player) >= -45 && -360+instance.yawSave.get(player) <= 0) || (-360+instance.yawSave.get(player) <= -315 && -360+instance.yawSave.get(player) >= -360)) {
-
-                    System.out.println("Yaw: "+yaw+" Pitch: "+pitch+" Clipdirection: "+clipdirection+" Difference: "+difference);
-
-                    if (yaw > 180 && yaw < 360) {
-                        Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " " + pitch + " 0 ");
-
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                Bukkit.getServer().dispatchCommand(player, "/paste");
-                            }
-                        }, 10);
-
-                    } else {
-                        if (clipdirection > 0 && clipdirection < 45) {
-                            Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " " + pitch + " 0 ");
+                    Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                        public void run() {
+                            Bukkit.getServer().dispatchCommand(player, "/rotate " + difference *(-1) + " 0 0");
 
                             Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                                 public void run() {
-                                    Bukkit.getServer().dispatchCommand(player, "/paste");
-                                }
-                            }, 10);
-                        } else {
-                            Bukkit.getServer().dispatchCommand(player, "/rotate " + difference + " " + pitch + " 0 ");
 
-                            Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                                public void run() {
                                     Bukkit.getServer().dispatchCommand(player, "/paste");
                                 }
-                            }, 10);
+                            }, 20);
                         }
-                    }
+                    }, 20);
                 }
-            }
+            },20);
+
         }
     }
+
+    public float convertYaw(float yaw) {
+        if(yaw < 0) {
+            return 360 + yaw;
+        }
+        return yaw;
+    }
+
 }

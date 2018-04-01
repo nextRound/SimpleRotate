@@ -5,6 +5,7 @@ import de.nextround.nextrotate.utils.fastRotate;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 
 import java.util.HashMap;
 
@@ -13,6 +14,8 @@ public class Main extends JavaPlugin{
     private String prefix = "§8[§3nextRotate§8]";
 
     public HashMap<Player, Float> yawSave = new HashMap<Player, Float>();
+
+    public HashMap<Player, Vector> vecSave = new HashMap<Player, Vector>();
 
     public fastRotate fastrotate;
 

@@ -42,7 +42,9 @@ public class nextrotateCommand implements CommandExecutor{
 
                         final Clipboard clipboard = clipboardHolder.getClipboards().get(0);
 
-                        instance.fastrotate.rotate(player);
+                        player.sendMessage("YAW: "+player.getLocation().getYaw()+" PITCH: "+player.getLocation().getPitch());
+
+                        instance.fastrotate.justRotate(player);
 
                         Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                             public void run() {
@@ -60,19 +62,11 @@ public class nextrotateCommand implements CommandExecutor{
                 }
             }else if(args.length==1) {
                 if(args[0].equalsIgnoreCase("direction")) {
-                    if(player.getLocation().getYaw() < 0) {
-                        instance.yawSave.put(player, player.getLocation().getYaw());
+                    instance.yawSave.put(player, player.getLocation().getYaw());
 
-                        Bukkit.getServer().dispatchCommand(player, "/copy");
+                    Bukkit.getServer().dispatchCommand(player, "/copy");
 
-                        player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + (player.getLocation().getYaw()));
-                    }else{
-                        instance.yawSave.put(player, player.getLocation().getYaw());
-
-                        Bukkit.getServer().dispatchCommand(player, "/copy");
-
-                        player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + player.getLocation().getYaw());
-                    }
+                    player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + instance.fastrotate.convertYaw(player.getLocation().getYaw()));
                 }else{
                     player.sendMessage(instance.getPrefix()+" §9Usage§8: §f/nextrotate [direction]");
                     return false;
@@ -88,20 +82,12 @@ public class nextrotateCommand implements CommandExecutor{
             }
 
             if(args.length==0) {
-                if(player.getLocation().getYaw() < 0) {
-                    instance.yawSave.put(player, player.getLocation().getYaw());
+                instance.yawSave.put(player, player.getLocation().getYaw());
 
-                    Bukkit.getServer().dispatchCommand(player, "/copy");
+                Bukkit.getServer().dispatchCommand(player, "/copy");
 
-                    player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + (player.getLocation().getYaw()));
-                }else{
-                    instance.yawSave.put(player, player.getLocation().getYaw());
-
-                    Bukkit.getServer().dispatchCommand(player, "/copy");
-
-                    player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + player.getLocation().getYaw());
-                }
-            }else{
+                player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + instance.fastrotate.convertYaw(player.getLocation().getYaw()));
+            } else{
                 player.sendMessage(instance.getPrefix()+" §9Usage§8: §f/nrd");
             }
         }
