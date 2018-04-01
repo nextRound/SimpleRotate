@@ -15,8 +15,6 @@ public class Main extends JavaPlugin{
 
     public HashMap<Player, Float> yawSave = new HashMap<Player, Float>();
 
-    public HashMap<Player, Vector> vecSave = new HashMap<Player, Vector>();
-
     public fastRotate fastrotate;
 
     @Override

@@ -42,16 +42,22 @@ public class nextrotateCommand implements CommandExecutor{
 
                         final Clipboard clipboard = clipboardHolder.getClipboards().get(0);
 
-                        instance.fastrotate.justRotate(player);
+                        int area = clipboard.getRegion().getWidth() * clipboard.getRegion().getHeight() * clipboard.getRegion().getLength();
 
-                        Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
-                            public void run() {
-                                fawePlayer.getSession().setClipboard(new ClipboardHolder(clipboard, fawePlayer.getWorld().getWorldData()));
+                        if(area < 500000) {
+                            instance.fastrotate.justRotate(player, clipboard);
 
-                                player.sendMessage(instance.getPrefix() + " §9Clipboard rotated and pasted!");
-                            }
-                        },20);
+                            Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                                public void run() {
+                                    fawePlayer.getSession().setClipboard(new ClipboardHolder(clipboard, fawePlayer.getWorld().getWorldData()));
 
+                                    player.sendMessage(instance.getPrefix() + " §9Clipboard rotated and pasted!");
+                                }
+                            }, 25 + instance.fastrotate.getTick(clipboard));
+
+                        } else {
+                            player.sendMessage(instance.getPrefix() + " §cYour clipboard region is too big! It should be smaller than §e500000 §cblocks!");
+                        }
                     }
                 }catch (EmptyClipboardException e) {
                     player.sendMessage(instance.getPrefix()+" §cYour cilpboard is empty!");
