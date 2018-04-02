@@ -45,7 +45,7 @@ public class nextrotateCommand implements CommandExecutor{
                         int area = clipboard.getRegion().getWidth() * clipboard.getRegion().getHeight() * clipboard.getRegion().getLength();
 
                         if(area < 500000) {
-                            instance.fastrotate.justRotate(player, clipboard);
+                            instance.fastrotate.justRotate(player, clipboard, false);
 
                             Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                                 public void run() {
@@ -71,12 +71,46 @@ public class nextrotateCommand implements CommandExecutor{
                     Bukkit.getServer().dispatchCommand(player, "/copy");
 
                     player.sendMessage(instance.getPrefix() + " §9Your clipboard direction is now: §e" + instance.fastrotate.convertYaw(player.getLocation().getYaw()));
+                }else if(args[0].equalsIgnoreCase("-a")){
+                    if(!instance.yawSave.containsKey(player)) {
+                        player.sendMessage(instance.getPrefix()+" §cYou have to set your clipboard direction: §e/nextrotate direction");
+                        return false;
+                    }
+                    try {
+                        if (fawePlayer.getSession().getClipboard() != null) {
+
+                            ClipboardHolder clipboardHolder = fawePlayer.getSession().getClipboard();
+
+                            final Clipboard clipboard = clipboardHolder.getClipboards().get(0);
+
+                            int area = clipboard.getRegion().getWidth() * clipboard.getRegion().getHeight() * clipboard.getRegion().getLength();
+
+                            if(area < 500000) {
+                                instance.fastrotate.justRotate(player, clipboard, true);
+
+                                Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
+                                    public void run() {
+                                        fawePlayer.getSession().setClipboard(new ClipboardHolder(clipboard, fawePlayer.getWorld().getWorldData()));
+
+                                        player.sendMessage(instance.getPrefix() + " §9Clipboard rotated and pasted!");
+                                    }
+                                }, 25 + instance.fastrotate.getTick(clipboard));
+
+                            } else {
+                                player.sendMessage(instance.getPrefix() + " §cYour clipboard region is too big! It should be smaller than §e500000 §cblocks!");
+                            }
+                        }
+                    }catch (EmptyClipboardException e) {
+                        player.sendMessage(instance.getPrefix()+" §cYour cilpboard is empty!");
+                        e.printStackTrace();
+                        return false;
+                    }
                 }else{
-                    player.sendMessage(instance.getPrefix()+" §9Usage§8: §f/nextrotate [direction]");
+                    player.sendMessage(instance.getPrefix()+" §9Usage§8: §f/nextrotate [direction|-a]");
                     return false;
                 }
             }else{
-                player.sendMessage(instance.getPrefix()+" §9Usage§8: §f/nextrotate [direction]");
+                player.sendMessage(instance.getPrefix()+" §9Usage§8: §f/nextrotate [direction|-a]");
                 return false;
             }
         }else if(command.getName().equalsIgnoreCase("nrd")) {

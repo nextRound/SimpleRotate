@@ -13,7 +13,7 @@ public class fastRotate {
         this.instance = instance;
     }
 
-    public void justRotate(final Player player, Clipboard clipboard) {
+    public void justRotate(final Player player, Clipboard clipboard, final boolean ignoreair) {
         float firstyaw = convertYaw(instance.yawSave.get(player));
         float secyaw = convertYaw(player.getLocation().getYaw());
 
@@ -42,9 +42,15 @@ public class fastRotate {
                             Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                                 public void run() {
 
-                                    Bukkit.getServer().dispatchCommand(player, "/paste -a");
+                                    if (ignoreair) {
+                                        Bukkit.getServer().dispatchCommand(player, "/paste -a");
 
-                                    player.sendMessage(instance.getPrefix() + " §e100%");
+                                        player.sendMessage(instance.getPrefix() + " §e100%");
+                                    } else {
+                                        Bukkit.getServer().dispatchCommand(player, "/paste");
+
+                                        player.sendMessage(instance.getPrefix() + " §e100%");
+                                    }
                                 }
                             }, 10);
                         }
@@ -72,9 +78,15 @@ public class fastRotate {
                             Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                                 public void run() {
 
-                                    Bukkit.getServer().dispatchCommand(player, "/paste -a");
+                                    if (ignoreair) {
+                                        Bukkit.getServer().dispatchCommand(player, "/paste -a");
 
-                                    player.sendMessage(instance.getPrefix() + " §e100%");
+                                        player.sendMessage(instance.getPrefix() + " §e100%");
+                                    } else {
+                                        Bukkit.getServer().dispatchCommand(player, "/paste");
+
+                                        player.sendMessage(instance.getPrefix() + " §e100%");
+                                    }
                                 }
                             }, 10);
                         }
@@ -102,9 +114,15 @@ public class fastRotate {
                             Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                                 public void run() {
 
-                                    Bukkit.getServer().dispatchCommand(player, "/paste -a");
+                                    if (ignoreair) {
+                                        Bukkit.getServer().dispatchCommand(player, "/paste -a");
 
-                                    player.sendMessage(instance.getPrefix() + " §e100%");
+                                        player.sendMessage(instance.getPrefix() + " §e100%");
+                                    } else {
+                                        Bukkit.getServer().dispatchCommand(player, "/paste");
+
+                                        player.sendMessage(instance.getPrefix() + " §e100%");
+                                    }
                                 }
                             }, 10);
                         }
@@ -132,9 +150,15 @@ public class fastRotate {
                             Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                                 public void run() {
 
-                                    Bukkit.getServer().dispatchCommand(player, "/paste -a");
+                                    if (ignoreair) {
+                                        Bukkit.getServer().dispatchCommand(player, "/paste -a");
 
-                                    player.sendMessage(instance.getPrefix() + " §e100%");
+                                        player.sendMessage(instance.getPrefix() + " §e100%");
+                                    } else {
+                                        Bukkit.getServer().dispatchCommand(player, "/paste");
+
+                                        player.sendMessage(instance.getPrefix() + " §e100%");
+                                    }
                                 }
                             }, 10);
                         }
