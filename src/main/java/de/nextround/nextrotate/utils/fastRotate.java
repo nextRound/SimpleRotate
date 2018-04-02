@@ -42,7 +42,7 @@ public class fastRotate {
                             Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                                 public void run() {
 
-                                    Bukkit.getServer().dispatchCommand(player, "/paste");
+                                    Bukkit.getServer().dispatchCommand(player, "/paste -a");
 
                                     player.sendMessage(instance.getPrefix() + " §e100%");
                                 }
@@ -72,7 +72,7 @@ public class fastRotate {
                             Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                                 public void run() {
 
-                                    Bukkit.getServer().dispatchCommand(player, "/paste");
+                                    Bukkit.getServer().dispatchCommand(player, "/paste -a");
 
                                     player.sendMessage(instance.getPrefix() + " §e100%");
                                 }
@@ -102,7 +102,7 @@ public class fastRotate {
                             Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                                 public void run() {
 
-                                    Bukkit.getServer().dispatchCommand(player, "/paste");
+                                    Bukkit.getServer().dispatchCommand(player, "/paste -a");
 
                                     player.sendMessage(instance.getPrefix() + " §e100%");
                                 }
@@ -132,7 +132,7 @@ public class fastRotate {
                             Bukkit.getScheduler().runTaskLater(instance, new Runnable() {
                                 public void run() {
 
-                                    Bukkit.getServer().dispatchCommand(player, "/paste");
+                                    Bukkit.getServer().dispatchCommand(player, "/paste -a");
 
                                     player.sendMessage(instance.getPrefix() + " §e100%");
                                 }
